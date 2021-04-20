@@ -5,18 +5,20 @@ import './App.css';
 // import CreateRef from './component/--CreateRef'
 // import DivShow from './component/DivShow'
 // import CounterInterval from './component/CounterInterval'
-
 // import Users from './component/Users';
 // import Diagram from './main/Diagram'
-import Geogtaphy from './udemy/Geogtaphy';
-import TimeSeting from './udemy/TimeSeting'
+import Geogtaphy from './udemy/Locations/Geogtaphy';
+import TimeSeting from './udemy/Locations/TimeSeting'
 
 function App() {
 
   return (
     <div className="App">
-     <Geogtaphy/>
+      {/* practice one get location*/}
+     {/* <Geogtaphy/> */}
      {/* <TimeSeting/> */}
+     {/* practice two pics */}
+
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import SeasonDisplay from './SeasonDisplay'
-import Spiner from './Spiner'
+import Spiner from '../Spiner'
 
 
 class Geogtaphy extends Component{
@@ -29,7 +29,7 @@ componentDidMount(){
         //  <SeasonDisplay lat={this.state.lat}/>
         //   {this.state.errorMessage?<p>error:{this.state.errorMessage}</p>:''}
         //     </div>
-        return <di><Spiner message="accept the request loacation please"/></di>
+        return <div><Spiner message="accept the request loacation please"/></div>
     }
 }
 
