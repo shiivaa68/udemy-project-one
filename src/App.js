@@ -1,23 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+// import './style.css'
+// import Counter from './component/Counter'
+// import CounterFun from './component/ConterFun'
+// import CreateRef from './component/--CreateRef'
+// import DivShow from './component/DivShow'
+// import CounterInterval from './component/CounterInterval'
+
+// import Users from './component/Users';
+// import Diagram from './main/Diagram'
+import Geogtaphy from './udemy/Geogtaphy';
+import TimeSeting from './udemy/TimeSeting'
 
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <Geogtaphy/>
+     {/* <TimeSeting/> */}
     </div>
   );
 }
