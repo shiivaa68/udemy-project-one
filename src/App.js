@@ -1,94 +1,61 @@
 import { Component } from 'react';
 import './App.css';
-// import './style.css'
-// import Counter from './component/Counter'
-// import CounterFun from './component/ConterFun'
-// import CreateRef from './component/--CreateRef'
-// import DivShow from './component/DivShow'
-// import CounterInterval from './component/CounterInterval'
-// import Users from './component/Users';
-// import Diagram from './main/Diagram'
-import Geogtaphy from './udemy/Locations/Geogtaphy';
-import TimeSeting from './udemy/Locations/TimeSeting'
-import SearchBar from './udemy/pics/SearchBar'
-import unsplash from './udemy/api/unsplash'
-import ImageList from './udemy/pics/ImageList'
-// function App() {
-
-//   return (
-//     <div className="App">
-//       {/* practice one get location*/}
-//      {/* <Geogtaphy/> */}
-//      {/* <TimeSeting/> */}
-   
-//      <div className="ui container" style={{marginTop:'20px'}}>
-//          {/* practice two pics */}
-//      <SearchBar/>
-//      </div>
-
-//     </div>
-//   );
-// }
+import SearchBar from './udemy/searchutub/SearchBar'
+import youtube from './udemy/searchutub/api/Youtube'
+import VideoList from './udemy/searchutub/VideoList'
+import VideoDetail from  './udemy/searchutub/VideoDetail'
 
 class App extends Component{
 
-  // onSearchSubmit(term){
-  //  axios.get('https://api.unsplash.com/search/photos',{
-  //    params:{query:term},
-  //    headers:{
-  //      Authorization:'Client-ID 2b98c1afb0aed3b3d94a1866bdc3ac013d21a0c86d236a0fee32355c331c0296'
-       
-  //    }
-  //  })
-  //  .then()
-  // }
 
-state={
-  images:[]
+state ={videos :[],
+  selectedVideo:null}
+
+componentDidMount(){
+  this.onTermSubmit('buildings')
 }
 
 
-onSearchSubmit = async (term) => {
-  const response = await unsplash.get('/search/photos', {
-    params: { query: term },
-  });
-
-  this.setState({ images: response.data.results });
-};
 
 
-
-  // onSearchSubmit(term) {
-  //   unsplash.get('/search/photos', {
-  //     params: { query: term },
+onTermSubmit = (term)=>{
+  youtube.get('/search',{
+    params:{
+      q:term
+    }
+  }).then(
+    response =>this.setState({videos:response.data.items,
+    selectedVideo:response.data.items[0]
     
-  //   }).then((response)=>{
-  //   this.setState({Images:response.data.results})
+    })
+  )
+}
 
-  //   })
-  // }
+onVideoSelect = (video) => {
+this.setState({selectedVideo:video})
 
-//   async onSearchSubmit(term) {
-//  const response = await  axios.get('https://api.unsplash.com/search/photos', {
-//       params: { query: term },
-//       headers: {
-//         Authorization:
-//           'Client-ID 2b98c1afb0aed3b3d94a1866bdc3ac013d21a0c86d236a0fee32355c331c0296',
-//       },
-//     })
+console.log(this.selectedVideo,'selectedVideo')
+console.log(video,'vidio app js')
+}
 
-
-//     console.log(response.data.results)
-//   }
 
 
   render() {
     return (
-      <div className="ui container" style={{marginTop:'20px'}}>
-         {/* practice two pics */}
-     <SearchBar onSubmit={this.onSearchSubmit}/>
-     <ImageList images={this.state.images}/>
-    
+       <div className="ui container" style={{marginTop:'20px'}}>
+     <SearchBar onFormSubmit ={this.onTermSubmit}/>
+   <div className="ui grid">
+<div className="ui row">
+
+  <div className="eleven wide column">
+  <VideoDetail video={ this.state.selectedVideo}/>
+  </div>
+  <div className="five wide column">
+  <VideoList onVideoSelect={this.onVideoSelect}  videos ={this.state.videos}/>
+
+  </div>
+   </div>
+   </div>
      </div>
   
     );
