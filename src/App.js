@@ -1,65 +1,53 @@
-import { Component } from 'react';
+
 import './App.css';
-import SearchBar from './udemy/searchutub/SearchBar'
-import youtube from './udemy/searchutub/api/Youtube'
-import VideoList from './udemy/searchutub/VideoList'
-import VideoDetail from  './udemy/searchutub/VideoDetail'
+import Accordion from './udemy/hook-udemy/Accordion'
+import Search from './udemy/hook-udemy/Search';
+import DropDown from './udemy/hook-udemy/DropDown'
+import { useState } from 'react';
+import Translate from './udemy/hook-udemy/Translate'
+const App = ()=>{
 
-class App extends Component{
 
-
-state ={videos :[],
-  selectedVideo:null}
-
-componentDidMount(){
-  this.onTermSubmit('buildings')
+const items = [{
+  title:'what is react',
+  content:'liabarary is react '
+},
+{
+  title:'why is react',
+  content:'react is easy'
+},
+{
+  title:'what is component',
+  content:'usable code'
 }
+]
+
+const options =[{
+  label:'the color red',
+  color:'red'
+},{
+  label:'the color green',
+  color:'green'
+},
+
+{label:'the color blue',
+color:'blue'
+}
+]
 
 
+const [selected,setSelected] = useState(options[0])
+const [showDropDown,setShowDropdown] = useState(true)
 
+  return(
+  <div className="ui container">
 
-onTermSubmit = (term)=>{
-  youtube.get('/search',{
-    params:{
-      q:term
-    }
-  }).then(
-    response =>this.setState({videos:response.data.items,
-    selectedVideo:response.data.items[0]
-    
-    })
+  {/* <Accordion items={items}/> */}
+  {/* <Search/> */}
+  {/* <button onClick ={()=>setShowDropdown(!showDropDown)}>show toggle drop down</button>
+  {showDropDown ? <DropDown options={options} selected={selected} onSelectedChange={setSelected}/> :null} */}
+  <Translate/>
+  </div>
   )
 }
-
-onVideoSelect = (video) => {
-this.setState({selectedVideo:video})
-
-console.log(this.selectedVideo,'selectedVideo')
-console.log(video,'vidio app js')
-}
-
-
-
-  render() {
-    return (
-       <div className="ui container" style={{marginTop:'20px'}}>
-     <SearchBar onFormSubmit ={this.onTermSubmit}/>
-   <div className="ui grid">
-<div className="ui row">
-
-  <div className="eleven wide column">
-  <VideoDetail video={ this.state.selectedVideo}/>
-  </div>
-  <div className="five wide column">
-  <VideoList onVideoSelect={this.onVideoSelect}  videos ={this.state.videos}/>
-
-  </div>
-   </div>
-   </div>
-     </div>
-  
-    );
-  
-}}
-
 export default App;
